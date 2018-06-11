@@ -14,7 +14,7 @@ public class Sql2oRestaurantDao implements RestaurantDao {
 
     @Override
     public void add(Restaurant restaurant) {
-        String sql = "INSERT INTO restaurant(name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
+        String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
         try (Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true)
                     .bind(restaurant)
@@ -36,11 +36,30 @@ public class Sql2oRestaurantDao implements RestaurantDao {
 
     @Override
     public Restaurant findById(int id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM restaurants WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Restaurant.class);
+        }
 
     }
 
     @Override
     public void update(int id, String name, String address, String zipcode, String phone, String website, String email) {
+        String sql = "UPDATE restaurants SET (name, address, zipcode, phone, website, email) = (:name, :address, :zipcode, :phone, :website, :email) WHERE id=:id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("name", name)
+                    .addParameter("address", address)
+                    .addParameter("zipcode", zipcode)
+                    .addParameter("phone", phone)
+                    .addParameter("website", website)
+                    .addParameter("email", email)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
 
     }
 
