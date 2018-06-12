@@ -32,6 +32,13 @@ public class Sql2oFoodtypeDaoTest {
 
     }
 
+//    @Test
+//    public void findById() {
+//        Foodtype foodtype = setupNewFoodtype();
+//
+//        assertEquals();
+//    }
+
     @Test
     public void addFoodTypeToRestaurantAddsTypeCorrectly() {
         Restaurant restaurant = setupNewRestaurant();

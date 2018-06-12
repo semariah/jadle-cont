@@ -31,6 +31,12 @@ public class Sql2oRestaurantDaoTest {
     }
 
     @Test
+    public void getAll() throws Exception{
+        Restaurant restaurant = setupNewRestaurant();
+        assertEquals(1, restaurantDao.getAll().size());
+    }
+
+    @Test
     public void RestaurantReturnsFoodtypesCorrectly() throws Exception {
         Foodtype foodtype = new Foodtype("Seafood");
         foodtypeDao.add(foodtype);

@@ -1,5 +1,6 @@
 package models;
 
+import java.security.KeyStore;
 import java.util.Objects;
 
 public class Restaurant {
@@ -105,4 +106,5 @@ public class Restaurant {
 
         return Objects.hash(name, address, zipcode, phone, website, email, id);
     }
+
 }
