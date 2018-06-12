@@ -7,6 +7,8 @@ import models.Restaurant;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import static spark.Spark.*;
+import exceptions.ApiException;
+
 
 public class App {
 
@@ -79,12 +81,12 @@ public class App {
 
 
 
-//        get("/foodtypes/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
-//            res.type("application/json");
-//            int foodtypeId = Integer.parseInt(req.params("id"));
-//            res.type("application/json");
-//            return gson.toJson(foodtypeDao.findById(foodtypeId));
-//        });
+        get("/foodtypes/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            res.type("application/json");
+            int foodtypeId = Integer.parseInt(req.params("id"));
+            res.type("application/json");
+            return gson.toJson(foodtypeDao.findById(foodtypeId));
+        });
 
         after((req, res) ->{
             res.type("application/json");
